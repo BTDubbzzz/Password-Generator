@@ -37,21 +37,50 @@ if (wantsPassword === true) {
  alert('Thank you');
 }
 
+//THIS WILL BE THE HARD PART ---------------------------------------------------------------------------------------
 function getCharacterSet() {
+ var parameterCount = 0;
  if (hasLowercase) {
-  characterSet += lowercaseChars;
+  parameterCount += 1;
  }
  if (hasUppercase) {
-  characterSet += uppercaseChars;
+  parameterCount += 1;
  }
  if (hasNumericChars) {
-  characterSet += numericChars;
+  parameterCount += 1;
  }
  if (hasSpecialChars) {
-  characterSet += specialChars;
+  parameterCount += 1;
  }
- console.log(characterSet);
+
+ console.log('parameterCount :>> ', parameterCount);
+
+ var characterPools = [];
+
+ while (characterPools.length < parameterCount) {
+  var r = Math.floor(Math.random() * 100) + 1;
+  if (characterPools.indexOf(r) === -1) characterPools.push(r);
+ }
+ console.log('characterPools :>> ', characterPools);
+
+ var total = 0;
+ for (var i in characterPools) {
+  total += characterPools[i];
+ }
+ console.log('total :>> ', total);
+
+ var finalArray = [];
+ console.log('finalArray :>> ', finalArray);
 }
+
+// get a number of how many paramaters are true   CHECK
+// divide passwordLength unevenly in that many parts
+// assign each part to 1 new var
+// run each variable into a randomizer based on its own const chartype variable
+// this creates a new variable for each
+// now we concatenate each new variable
+
+// WORKING IN HERE PRIMARILY ----------------------------------------------------------------------------------------
 
 function generatePassword() {
  alert('generating password');
@@ -93,3 +122,19 @@ function definePassword() {
 
  getCharacterSet();
 }
+
+// create 4 pools - 1 for each charType: then we take the passwordLength and divide it randomly between
+//
+// those 4 pools, so each pool is assigned a number (passwordPercent?) we then take that number for each charType and
+//
+// randomize the characters for its own string length
+//
+// then we concatenate the 4 strings
+//
+// then we send that concated string to an array
+
+// scramble the array
+
+// .toString it
+
+// there is your password
