@@ -187,6 +187,8 @@ function definePassword() {
 	ensureEachCriteria();
 	getRandomPasswordArray();
 	combinePasswords();
+	console.log('finalPassword :>> ', finalPassword);
+	alert(`Your password is: ${finalPassword} `);
 }
 // =================================================================================================================================
 //
