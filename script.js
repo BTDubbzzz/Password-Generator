@@ -12,6 +12,15 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
 
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+
 var wantsPassword = '';
 var passwordLength = '';
 var hasLowercase = '';
@@ -30,58 +39,20 @@ const numericChars = '0123456789';
 const specialChars = ' !"#$%&\'()*+,-./:;<=>?@[]^_`{|}~';
 
 wantsPassword = confirm('Hello, would you like to generate a password?');
-
-if (wantsPassword === true) {
-	definePassword();
-} else {
-	alert('Thank you');
-}
-
-//THIS WILL BE THE HARD PART ---------------------------------------------------------------------------------------
-function getCharacterSet() {
-	var parameterCount = 0;
-	if (hasLowercase) {
-		parameterCount += 1;
-	}
-	if (hasUppercase) {
-		parameterCount += 1;
-	}
-	if (hasNumericChars) {
-		parameterCount += 1;
-	}
-	if (hasSpecialChars) {
-		parameterCount += 1;
-	}
-
-	console.log('parameterCount :>> ', parameterCount);
-
-	//generate Math.floor(parameterCount - 1) between 1 and passwordLength
-	//add 1 to the array
-	//sort array
-	//take differences of adjacent numbers
-}
-
-// get a number of how many paramaters are true   CHECK
-// divide passwordLength unevenly in that many parts
-// assign each part to 1 new var
-// run each variable into a randomizer based on its own const chartype variable
-// this creates a new variable for each
-// now we concatenate each new variable
-
-// WORKING IN HERE PRIMARILY ----------------------------------------------------------------------------------------
-
-function generatePassword() {
-	alert('generating password');
-}
+// ----------------------------------------------------------------------------------------
 
 function getParameters() {
 	hasLowercase = confirm('Would you like to include lowercase characters?');
+	console.log('hasLowercase :>> ', hasLowercase);
 	hasUppercase = confirm('Would you like to include uppercase characters?');
+	console.log('hasUppercase :>> ', hasUppercase);
 	hasNumericChars = confirm('Would you like to include numeric characters?');
+	console.log('hasNumericChars :>> ', hasNumericChars);
 	hasSpecialChars = confirm('Would you like to include special characters?');
+	console.log('hasSpecialChars :>> ', hasSpecialChars);
 }
 
-function getpasswordLength() {
+function getPasswordLength() {
 	do {
 		passwordLength = prompt(
 			'How many characters would you like your password to be? (between 8-128 characters)'
@@ -93,8 +64,11 @@ function getpasswordLength() {
 }
 
 function definePassword() {
-	alert('password being generated');
-	getpasswordLength();
+	console.log('about to get password length');
+
+	getPasswordLength();
+	console.log('passwordLength :>> ', passwordLength);
+	console.log('about to get password parameters');
 
 	do {
 		getParameters();
@@ -107,32 +81,49 @@ function definePassword() {
 		!hasNumericChars &&
 		!hasSpecialChars
 	);
+}
+// =================================================================================================================================
+// going to pull 1 character from each chosen pool to ensure it has 1 of all chosen criteria
 
-	getCharacterSet();
+function getRandomNumber(min, max) {
+	return Math.floor(Math.random() * (max - min) + min);
 }
 
-// create 4 pools - 1 for each charType: then we take the passwordLength and divide it randomly between
 //
-// those 4 pools, so each pool is assigned a number (passwordPercent?) we then take that number for each charType and
-//
-// randomize the characters for its own string length
-//
-// then we concatenate the 4 strings
-//
-// then we send that concated string to an array
+// This gets 1 character for each chartype passed through it - will need to be saved to separate variables on each iteration
+function getOneRandomCharacter(chartype) {
+	var randomNumber = getRandomNumber(0, chartype.length);
+	return chartype.charAt(randomNumber);
+}
 
-// scramble the array
+console.log(
+	'getOneRandomCharacter(uppercaseChars) :>> ',
+	getOneRandomCharacter(uppercaseChars)
+);
 
-// .toString it
+var beginningPasswordArray = [];
 
-// there is your password
+function ensureEachCriteria() {
+	if (hasUppercase) {
+		beginningPasswordArray.push(getOneRandomCharacter(uppercaseChars));
+	}
+	if (hasLowercase) {
+		beginningPasswordArray.push(getOneRandomCharacter(lowercaseChars));
+	}
+	if (hasNumericChars) {
+		beginningPasswordArray.push(getOneRandomCharacter(numericChars));
+	}
+	if (hasSpecialChars) {
+		beginningPasswordArray.push(getOneRandomCharacter(specialChars));
+	}
+}
 
-// Generate N-1 random numbers between 0 and 1, add the numbers 0 and 1 themselves to the list, sort them,
-// and take the differences of adjacent numbers.
+// =================================================================================================================================
+if (wantsPassword === true) {
+	definePassword();
+} else {
+	alert('Thank you');
+}
 
-// can someone ELI5? I don't understand how this produces 3 numbers that add up to 8 for example.
-
-//  To get "0 between 8" use 8 instead of 1 in the algorithm and use 3 for N. The reason it
-//  works is that it's like taking a piece of string with a set length, marking it at random places
-//   and then cutting it where the marks are. You end up with N pieces of string which must add
-//   up to the original length.
+ensureEachCriteria();
+console.log('beginningPasswordArray :>> ', beginningPasswordArray);
