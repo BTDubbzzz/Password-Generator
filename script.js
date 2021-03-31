@@ -98,7 +98,7 @@ function getPasswordLength() {
 		if (isNaN(passwordLength) || passwordLength > 128 || passwordLength < 8) {
 			alert('You must choose a number between 8 and 128');
 		}
-	} while (isNaN(passwordLength) || passwordLength > 128 || passwordLength < 8);
+	} while (isNaN(passwordLength) || passwordLength > 128 || passwordLength < 8); // find a way to check for integer only
 }
 
 function getCharacterSet() {
@@ -118,13 +118,13 @@ function getCharacterSet() {
 }
 
 function getParameters() {
-	hasLowercase = confirm('Would you like to include lowercase characters?');
+	hasLowercase = confirm('Would you like to include lowercase characters? (cancel for no)');
 	console.log('hasLowercase :>> ', hasLowercase);
-	hasUppercase = confirm('Would you like to include uppercase characters?');
+	hasUppercase = confirm('Would you like to include uppercase characters? (cancel for no)');
 	console.log('hasUppercase :>> ', hasUppercase);
-	hasNumericChars = confirm('Would you like to include numeric characters?');
+	hasNumericChars = confirm('Would you like to include numeric characters? (cancel for no)');
 	console.log('hasNumericChars :>> ', hasNumericChars);
-	hasSpecialChars = confirm('Would you like to include special characters?');
+	hasSpecialChars = confirm('Would you like to include special characters? (cancel for no)');
 	console.log('hasSpecialChars :>> ', hasSpecialChars);
 	getCharacterSet();
 	console.log('characterSet :>> ', characterSet);
@@ -208,18 +208,18 @@ function runProgram() {
 }
 // =================================================================================================================================
 // -----runs program below-----------------------
-wantsPassword = confirm('Hello, would you like to generate a password?');
+wantsPassword = confirm('Hello, would you like to generate a password? (cancel for no) ');
 
 while (wantsPassword) {
 	if (wantsPassword) {
 	runProgram();
-	wantsPassword = confirm('Would you like to run again?')
+	wantsPassword = confirm('Would you like to generate another password? (cancel for no) ')
 	while (wantsPassword) {  
 		if (wantsPassword) {
 		getWantsSameCriteria();
 		if (wantsSameCriteria) {
 			generatePassword();
-			wantsPassword = confirm('Would you like to run again?')
+			wantsPassword = confirm('Would you like to generate another password? (cancel for no)')
 			if (wantsPassword) {
 
 			} else {
@@ -231,6 +231,6 @@ while (wantsPassword) {
 	}
 }
 } else {
-	alert('thank you anyway')
 }
 }
+alert('Thank you')
