@@ -28,7 +28,6 @@ var hasLowercase = '';
 var hasUppercase = '';
 var hasNumericChars = '';
 var hasSpecialChars = '';
-var wantsGenerateAgain = '';
 var wantsSameCriteria = '';
 var characterSet = '';
 var finalPasswordArray = [];
@@ -103,6 +102,7 @@ function getPasswordLength() {
 }
 
 function getCharacterSet() {
+	characterSet = ''
 	if (hasUppercase) {
 		characterSet += uppercaseChars;
 	}
@@ -134,6 +134,7 @@ function getParameters() {
 // going to pull 1 character from each chosen pool to ensure it has 1 of all chosen criteria
 
 function ensureEachCriteria() {
+	beginningPasswordArray = []
 	if (hasUppercase) {
 		beginningPasswordArray.push(getOneRandomCharacter(uppercaseChars));
 	}
@@ -155,6 +156,7 @@ function getOneRandomCharacter(chartype) {
 
 function getRandomPasswordArray() {
 	// generate (passwordLength - beginningPasswordArray.length) random characters from variableCharacterSet and push them to the array
+	randomPasswordArray = []
 	for (let i = 0; i < passwordLength - beginningPasswordArray.length; i++) {
 		randomPasswordArray.push(getOneRandomCharacter(characterSet));
 	}
@@ -195,26 +197,40 @@ function generatePassword() {
 	console.log('finalPassword :>> ', finalPassword);
 	alert(`Your password is: ${finalPassword} `);
 }
-// =================================================================================================================================
-//
-wantsPassword = confirm('Hello, would you like to generate a password?');
 
-if (wantsPassword === true) {
-	definePassword(); // FINAL PASSWORD ALERT OR WRITE-TO-PAGE INSIDE THIS IF ELSE (IF THEY CANCEL THE PROGRAM DO NOT WRITE NULL PASSWORD)
-	generatePassword();
-} else {
-	alert('Thank you');
+function getWantsSameCriteria() {
+	wantsSameCriteria = confirm('Would you like to use the same criteria?')
 }
 
-wantsGenerateAgain = confirm('Would you like to generate the password again?')
+function runProgram() {
+	definePassword();
+	generatePassword();
+}
+// =================================================================================================================================
+// -----runs program below-----------------------
+wantsPassword = confirm('Hello, would you like to generate a password?');
 
-if (wantsGenerateAgain) {
-	wantsSameCriteria = confirm('Would you like to use the same criteria?')
-	if (wantsSameCriteria) {
-		generatePassword();
-	} else {
-		alert('this is being implemented soon')
+while (wantsPassword) {
+	if (wantsPassword) {
+	runProgram();
+	wantsPassword = confirm('Would you like to run again?')
+	while (wantsPassword) {  
+		if (wantsPassword) {
+		getWantsSameCriteria();
+		if (wantsSameCriteria) {
+			generatePassword();
+			wantsPassword = confirm('Would you like to run again?')
+			if (wantsPassword) {
+
+			} else {
+				break
+			}
+		} else {
+			break
+		}
 	}
+}
 } else {
-	alert('Thank you')
+	alert('thank you anyway')
+}
 }
