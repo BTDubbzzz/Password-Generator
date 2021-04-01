@@ -95,14 +95,26 @@ function getPasswordLength() {
 		passwordLength = prompt(
 			'How many characters would you like your password to be? (between 8-128 characters)'
 		);
-		if (isNaN(passwordLength) || passwordLength > 128 || passwordLength < 8) {
+		console.log(
+			'Number.isInteger(passwordLength) :>> ' +
+				Number.isInteger(Number(passwordLength))
+		);
+		if (
+			!Number.isInteger(Number(passwordLength)) ||
+			passwordLength > 128 ||
+			passwordLength < 8
+		) {
 			alert('You must choose a number between 8 and 128');
 		}
-	} while (isNaN(passwordLength) || passwordLength > 128 || passwordLength < 8); // find a way to check for integer only
+	} while (
+		!Number.isInteger(Number(passwordLength)) ||
+		passwordLength > 128 ||
+		passwordLength < 8
+	);
 }
 
 function getCharacterSet() {
-	characterSet = ''
+	characterSet = '';
 	if (hasUppercase) {
 		characterSet += uppercaseChars;
 	}
@@ -118,13 +130,21 @@ function getCharacterSet() {
 }
 
 function getParameters() {
-	hasLowercase = confirm('Would you like to include lowercase characters? (cancel for no)');
+	hasLowercase = confirm(
+		'Would you like to include lowercase characters? (cancel for no)'
+	);
 	console.log('hasLowercase :>> ', hasLowercase);
-	hasUppercase = confirm('Would you like to include uppercase characters? (cancel for no)');
+	hasUppercase = confirm(
+		'Would you like to include uppercase characters? (cancel for no)'
+	);
 	console.log('hasUppercase :>> ', hasUppercase);
-	hasNumericChars = confirm('Would you like to include numeric characters? (cancel for no)');
+	hasNumericChars = confirm(
+		'Would you like to include numeric characters? (cancel for no)'
+	);
 	console.log('hasNumericChars :>> ', hasNumericChars);
-	hasSpecialChars = confirm('Would you like to include special characters? (cancel for no)');
+	hasSpecialChars = confirm(
+		'Would you like to include special characters? (cancel for no)'
+	);
 	console.log('hasSpecialChars :>> ', hasSpecialChars);
 	getCharacterSet();
 	console.log('characterSet :>> ', characterSet);
@@ -134,7 +154,7 @@ function getParameters() {
 // going to pull 1 character from each chosen pool to ensure it has 1 of all chosen criteria
 
 function ensureEachCriteria() {
-	beginningPasswordArray = []
+	beginningPasswordArray = [];
 	if (hasUppercase) {
 		beginningPasswordArray.push(getOneRandomCharacter(uppercaseChars));
 	}
@@ -156,12 +176,11 @@ function getOneRandomCharacter(chartype) {
 
 function getRandomPasswordArray() {
 	// generate (passwordLength - beginningPasswordArray.length) random characters from variableCharacterSet and push them to the array
-	randomPasswordArray = []
+	randomPasswordArray = [];
 	for (let i = 0; i < passwordLength - beginningPasswordArray.length; i++) {
 		randomPasswordArray.push(getOneRandomCharacter(characterSet));
 	}
 }
-
 
 function combinePasswords() {
 	finalPasswordArray = beginningPasswordArray.concat(randomPasswordArray);
@@ -187,7 +206,6 @@ function definePassword() {
 		!hasNumericChars &&
 		!hasSpecialChars
 	);
-
 }
 
 function generatePassword() {
@@ -199,7 +217,7 @@ function generatePassword() {
 }
 
 function getWantsSameCriteria() {
-	wantsSameCriteria = confirm('Would you like to use the same criteria?')
+	wantsSameCriteria = confirm('Would you like to use the same criteria?');
 }
 
 function runProgram() {
@@ -208,29 +226,63 @@ function runProgram() {
 }
 // =================================================================================================================================
 // -----runs program below-----------------------
-wantsPassword = confirm('Hello, would you like to generate a password? (cancel for no) ');
+
+wantsPassword = confirm(
+	'Hello, would you like to generate a password? (cancel for no) '
+);
 
 while (wantsPassword) {
 	if (wantsPassword) {
-	runProgram();
-	wantsPassword = confirm('Would you like to generate another password? (cancel for no) ')
-	while (wantsPassword) {  
-		if (wantsPassword) {
-		getWantsSameCriteria();
-		if (wantsSameCriteria) {
-			generatePassword();
-			wantsPassword = confirm('Would you like to generate another password? (cancel for no)')
-			if (wantsPassword) {
-
+		runProgram();
+		wantsPassword = confirm(
+			'Would you like to generate another password? (cancel for no) '
+		);
+		while (wantsPassword) {
+			getWantsSameCriteria();
+			if (wantsSameCriteria) {
+				generatePassword();
+				wantsPassword = confirm(
+					'Would you like to generate another password? (cancel for no)'
+				);
+				if (wantsPassword) {
+				} else {
+					break;
+				}
 			} else {
-				break
+				break;
 			}
-		} else {
-			break
 		}
+	} else {
 	}
 }
-} else {
-}
-}
-alert('Thank you')
+alert('Thank you');
+
+// ---------------- redundant code below but not 100% the new version works so keeping this -------------------------
+// while (wantsPassword) {
+// 	if (wantsPassword) {
+// 		runProgram();
+// 		wantsPassword = confirm(
+// 			'Would you like to generate another password? (cancel for no) '
+// 		);
+// 		while (wantsPassword) {
+// 			if (wantsPassword) {   // ************************ THIS IS THE REDUNDANT LINE **********************************
+// 				getWantsSameCriteria();
+// 				if (wantsSameCriteria) {
+// 					generatePassword();
+// 					wantsPassword = confirm(
+// 						'Would you like to generate another password? (cancel for no)'
+// 					);
+// 					if (wantsPassword) {
+// 					} else {
+// 						break;
+// 					}
+// 				} else {
+// 					break;
+// 				}
+// 			}
+// 		}
+// 	} else {
+// 	}
+// }
+// alert('Thank you');
+// ------------------------------------------------------------------------------------------------------------------
