@@ -3,14 +3,13 @@ var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
 function writePassword() {
-	var password = generatePassword();
 	var passwordText = document.querySelector('#password');
 
-	passwordText.value = password;
+	passwordText.value = finalPassword;
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener('click', writePassword);
+generateBtn.addEventListener('click', main);
 
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
@@ -34,7 +33,7 @@ var finalPasswordArray = [];
 const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
 const numericChars = '0123456789';
-const specialChars = ' !"#$%&\'()*+,-./:;<=>?@[]^_`{|}~';
+const specialChars = '!"#$%&\'()*+,-./:;<=>?@[]^_`{|}~';
 var finalPassword = '';
 var randomPasswordArray = [];
 var beginningPasswordArray = [];
@@ -214,6 +213,8 @@ function generatePassword() {
 	combinePasswords();
 	console.log('finalPassword :>> ', finalPassword);
 	alert(`Your password is: ${finalPassword} `);
+	writePassword();
+	return finalPassword;
 }
 
 function getWantsSameCriteria() {
@@ -227,35 +228,37 @@ function runProgram() {
 // =================================================================================================================================
 // -----runs program below-----------------------
 
-wantsPassword = confirm(
-	'Hello, would you like to generate a password? (cancel for no) '
-);
+function main() {
+	wantsPassword = confirm(
+		'Hello, would you like to generate a password? (cancel for no) '
+	);
 
-while (wantsPassword) {
-	if (wantsPassword) {
-		runProgram();
-		wantsPassword = confirm(
-			'Would you like to generate another password? (cancel for no) '
-		);
-		while (wantsPassword) {
-			getWantsSameCriteria();
-			if (wantsSameCriteria) {
-				generatePassword();
-				wantsPassword = confirm(
-					'Would you like to generate another password? (cancel for no)'
-				);
-				if (wantsPassword) {
+	while (wantsPassword) {
+		if (wantsPassword) {
+			runProgram();
+			wantsPassword = confirm(
+				'Would you like to generate another password? (cancel for no) '
+			);
+			while (wantsPassword) {
+				getWantsSameCriteria();
+				if (wantsSameCriteria) {
+					generatePassword();
+					wantsPassword = confirm(
+						'Would you like to generate another password? (cancel to get your password on the text area)'
+					);
+					if (wantsPassword) {
+					} else {
+						break;
+					}
 				} else {
 					break;
 				}
-			} else {
-				break;
 			}
+		} else {
 		}
-	} else {
 	}
+	alert('Thank you');
 }
-alert('Thank you');
 
 // ---------------- redundant code below but not 100% the new version works so keeping this -------------------------
 // while (wantsPassword) {
