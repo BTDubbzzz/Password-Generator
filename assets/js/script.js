@@ -77,6 +77,12 @@ function shuffle(array) {
 
 	return array;
 }
+
+function getOneRandomCharacter(chartype) {
+	var randomNumber = getRandomNumber(0, chartype.length);
+	return chartype.charAt(randomNumber);
+}
+
 // ---------------------------------------------------------------------------------
 //
 //
@@ -93,10 +99,6 @@ function getPasswordLength() {
 	do {
 		passwordLength = prompt(
 			'How many characters would you like your password to be? (between 8-128 characters)'
-		);
-		console.log(
-			'Number.isInteger(passwordLength) :>> ' +
-				Number.isInteger(Number(passwordLength))
 		);
 		if (
 			!Number.isInteger(Number(passwordLength)) ||
@@ -168,11 +170,6 @@ function ensureEachCriteria() {
 	}
 }
 
-function getOneRandomCharacter(chartype) {
-	var randomNumber = getRandomNumber(0, chartype.length);
-	return chartype.charAt(randomNumber);
-}
-
 function getRandomPasswordArray() {
 	// generate (passwordLength - beginningPasswordArray.length) random characters from variableCharacterSet and push them to the array
 	randomPasswordArray = [];
@@ -237,14 +234,14 @@ function main() {
 		if (wantsPassword) {
 			runProgram();
 			wantsPassword = confirm(
-				'Would you like to generate another password? (press cancel to write your password to the page)'
+				'Would you like to generate another password? (cancel for no) '
 			);
 			while (wantsPassword) {
 				getWantsSameCriteria();
 				if (wantsSameCriteria) {
 					generatePassword();
 					wantsPassword = confirm(
-						'Would you like to generate another password? (press cancel to write your password to the page)'
+						'Would you like to generate another password? (cancel to get your password on the text area)'
 					);
 					if (wantsPassword) {
 					} else {
@@ -259,33 +256,3 @@ function main() {
 	}
 	alert('Thank you');
 }
-
-// ---------------- redundant code below but not 100% the new version works so keeping this -------------------------
-// while (wantsPassword) {
-// 	if (wantsPassword) {
-// 		runProgram();
-// 		wantsPassword = confirm(
-// 			'Would you like to generate another password? (cancel for no) '
-// 		);
-// 		while (wantsPassword) {
-// 			if (wantsPassword) {   // ************************ THIS IS THE REDUNDANT LINE **********************************
-// 				getWantsSameCriteria();
-// 				if (wantsSameCriteria) {
-// 					generatePassword();
-// 					wantsPassword = confirm(
-// 						'Would you like to generate another password? (cancel for no)'
-// 					);
-// 					if (wantsPassword) {
-// 					} else {
-// 						break;
-// 					}
-// 				} else {
-// 					break;
-// 				}
-// 			}
-// 		}
-// 	} else {
-// 	}
-// }
-// alert('Thank you');
-// ------------------------------------------------------------------------------------------------------------------
