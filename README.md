@@ -28,8 +28,6 @@ I had a pretty iterative process through this - brainstorm, input, test, refine.
 
 Blake Wright – [My GitHub](https://github.com/BTDubbzzz) – wright.blake.t@gmail.com
 
-[https://github.com/yourname/github-link](https://github.com/dbader/)
-
 ## Contributing
 
 1. A shuffle Array function from Stack Overflow
