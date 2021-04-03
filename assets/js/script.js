@@ -234,14 +234,14 @@ function main() {
 		if (wantsPassword) {
 			runProgram();
 			wantsPassword = confirm(
-				'Would you like to generate another password? (cancel for no) '
+				'Would you like to generate another password? (press cancel to write your password to the page) '
 			);
 			while (wantsPassword) {
 				getWantsSameCriteria();
 				if (wantsSameCriteria) {
 					generatePassword();
 					wantsPassword = confirm(
-						'Would you like to generate another password? (cancel to get your password on the text area)'
+						'Would you like to generate another password? (press cancel to write your password to the page)'
 					);
 					if (wantsPassword) {
 					} else {
