@@ -8,7 +8,7 @@ Uses 4 criteria (lowercase, uppercase, numeric, special) character types and gen
 
 The deployed website can be accessed at the below link.
 
-https://btdubbzzz.github.io/Portfolio-Website/
+https://btdubbzzz.github.io/Password-Generator/
 
 ## Process / What I learned
 
